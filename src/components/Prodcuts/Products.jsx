@@ -1,8 +1,13 @@
 import React from 'react'
+import ProductsSearch from '../ProductsSearch/ProductsSearch'
 
 const Products = () => {
   return (
-    <div>Products</div>
+    <div className='bg-background border min-h-screen' >
+      <ProductsSearch/>
+      Category Filter
+      Products
+    </div>
   )
 }
 
