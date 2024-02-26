@@ -1,5 +1,5 @@
 import React from "react";
-import { FaSearch, FaSearchengin } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 const ProductsSearch = () => {
   return (
@@ -9,7 +9,7 @@ const ProductsSearch = () => {
         type="text"
         name="productSearch"
         id="productSearch"
-        placeHolder='Search Products...'
+        placeholder='Search Products...'
         className="w-full font-semibold text-xl"
       />
     </form>
