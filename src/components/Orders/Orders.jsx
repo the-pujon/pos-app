@@ -10,7 +10,11 @@ import {
   FaPlusCircle,
   FaRegHandRock,
 } from "react-icons/fa";
-import { MdMenu, MdOutlineCancel, MdOutlineLocalShipping } from "react-icons/md";
+import {
+  MdMenu,
+  MdOutlineCancel,
+  MdOutlineLocalShipping,
+} from "react-icons/md";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { RiEditBoxLine } from "react-icons/ri";
@@ -26,9 +30,10 @@ const Orders = () => {
     fetch("./Data/Orders.json")
       .then((res) => res.json())
       .then((data) => {
-
         //filtering order based on customers name
-        const filterOrders = data.filter((order) => order.name === "Steve Jobs")
+        const filterOrders = data.filter(
+          (order) => order.name === "Steve Jobs"
+        );
         setOrders(filterOrders[0]);
       });
   }, []);
@@ -40,12 +45,12 @@ const Orders = () => {
   return (
     <div className="mx-4">
       {/* Menu */}
-      <div className="flex w-full justify-between items-center gap-4 mt-2 mb-4">
+      <div className="flex w-full justify-between items-center gap-4 mt-2 mb-4 overflow-auto">
         {/* drawer left */}
 
-        <div className="drawer w-52">
+        <div className="drawer">
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content w-fit">
+          <div className="drawer-content w-10 md:w-fit">
             {/* Page content here */}
             <label
               htmlFor="my-drawer"
@@ -73,34 +78,55 @@ const Orders = () => {
         </div>
 
         <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center  bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
-        <RiEditBoxLine /> Note
+          <RiEditBoxLine /> Note
         </button>
         <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center  bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
-        <MdOutlineLocalShipping /> Shipping
+          <MdOutlineLocalShipping /> Shipping
         </button>
         <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
           <FaRegHandRock /> Hold Orders
         </button>
         <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
-        <FaPlusCircle /> New Items
+          <FaPlusCircle /> New Items
         </button>
       </div>
 
       {/* customers */}
       <div className="flex bg-primary2/20 py-3 px-2 text-primary2 font-semibold text-xl rounded items-center justify-between">
         <div>Steve Jobs</div>
-        <div className="border-4 border-primary2 rounded-full p-1">
+        {/*<div className="border-4 border-primary2 rounded-full p-1">
           <FaPlus />
-        </div>
+        </div>*/}
+
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
+        <button
+          className="border-4 border-primary2 rounded-full p-1"
+          onClick={() => document.getElementById("my_modal_5").showModal()}
+        >
+          <FaPlus />
+        </button>
+
+        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box  bg-white">
+            <h3 className="font-bold text-lg">Hello!</h3>
+            <p className="py-4">
+              Press ESC key or click the button below to close
+            </p>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+              <button>close</button>
+            </form>
+        </dialog>
       </div>
+
       {/* orders */}
-      <div>
+      <div className='w-full overflow-auto' >
         {/* orders */}
-        <div>
+        <div className='w-full overflow-auto'>
           {orders?.products?.map((product) => (
-            <div key={product.id} className="flex gap-2 items-center">
-               <button>
-               <FiEdit className='text-secondary text-xl'/>
+            <div key={product.id} className="flex gap-2 items-center w-[30rem] md:w-full overflow-auto">
+              <button>
+                <FiEdit className="text-secondary text-xl" />
               </button>
               <div className="text-secondary font-semibold text-xl justify-center items-center w-full grid grid-cols-5 border p-2">
                 <div className="col-span-2">{product?.name}</div>
@@ -125,7 +151,9 @@ const Orders = () => {
           <div className="flex-1 flex divide-y-2 flex-col mt-8 font-medium">
             <div className="flex w-full justify-between p-2 border-t-2">
               <span className="text-secondary">Subtotal</span>
-              <span className="text-xl font-semibold">${orders.totalPrice}</span>
+              <span className="text-xl font-semibold">
+                ${orders.totalPrice}
+              </span>
             </div>
             <div className="flex w-full justify-between p-2">
               <span className="text-secondary">TAX</span>
@@ -155,17 +183,17 @@ const Orders = () => {
         </div>
 
         {/* checkout */}
-        <div className="flex w-full justify-between gap-2 mt-2">
-          <button className="flex text-center py-4 px-4 gap-4 items-center bg-red-200 text-red-500 w-full text-xl font-semibold rounded">
+        <div className="flex w-full justify-between gap-2 mt-2 overflow-auto">
+          <button className="flex text-center py-4 px-4 gap-4 items-center text-nowrap bg-red-200 text-red-500 w-full text-xl font-semibold rounded">
             <MdOutlineCancel /> Cancel
           </button>
-          <button className="flex text-center py-4 px-4 gap-4 items-center bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
+          <button className="flex text-center py-4 px-4 gap-4 items-center text-nowrap bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
             <FaRegHandRock /> Hold
           </button>
-          <button className="flex text-center py-4 px-4 gap-4 items-center bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
+          <button className="flex text-center py-4 px-4 gap-4 items-center text-nowrap bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
             <FaPercent /> Discount
           </button>
-          <button className="flex text-center py-4 px-4 gap-4 items-center bg-primary/20 text-primary w-full text-xl font-semibold rounded">
+          <button className="flex text-center py-4 px-4 gap-4 items-center text-nowrap bg-primary/20 text-primary w-full text-xl font-semibold rounded">
             <FaHandHoldingUsd />
             Pay Now
           </button>

@@ -20,7 +20,6 @@ const Products = () => {
     fetch("./Data/Products.json")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         SetProducts(data);
         SetFilteredProducts(data);
       });
@@ -48,28 +47,26 @@ const Products = () => {
   }, [selectedCategory]);
 
   return (
-    <div className="bg-background border min-h-screen">
+    <div className="bg-background border min-h-screen pb-4">
       <ProductsSearch setSearch={setSearch} />
 
       {/* category filter */}
       <div className="w-full flex items-center justify-center mt-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 overflow-auto">
           {category?.slice(0, 5)?.map((category) => (
             <div
               onClick={() => SetSelectedCategory(category)}
               key={category.id}
-              className="py-2 px-4 w-fit border-[3px] border-secondary rounded hover:border-primary hover:text-primary cursor-pointer font-semibold text-secondary"
+              className="py-2 px-4 w-fit border-[3px] border-secondary text-nowrap rounded hover:border-primary hover:text-primary cursor-pointer font-semibold text-secondary"
             >
               {category.category}
             </div>
           ))}
 
-          {/*<div>*/}
 
           <div className="drawer drawer-end w-fit">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
-              {/* Page content here */}
               <label
                 htmlFor="my-drawer-4"
                 className="drawer-button cursor-pointer"
@@ -83,17 +80,16 @@ const Products = () => {
                 aria-label="close sidebar"
                 className="drawer-overlay"
               ></label>
-              <div className="min-h-full w-1/2 bg-white">
-                <h1 className="text-4xl font-semibold text-center py-8">
-                  {" "}
+              <div className="min-h-full w-2/3 md:w-1/2 bg-white">
+                <h1 className="text-3xl md:text-4xl font-semibold text-center py-8 px-2">
                   Categories
                 </h1>
-                <div className=" p-4 min-h-full bg-white text-base-content">
+                <div className=" p-4 min-h-full bg-white text-base-content ">
                   {category?.map((category) => (
                     <div
                       onClick={() => SetSelectedCategory(category)}
                       key={category.id}
-                      className="py-2 px-4 w-fit m-2 h-fit border-[3px] border-secondary rounded inline-flex hover:border-primary hover:text-primary cursor-pointer font-semibold text-secondary"
+                      className="py-2 px-4 w-full md:w-fit m-2 h-fit border-[3px] text-nowrap border-secondary rounded inline-flex hover:border-primary hover:text-primary cursor-pointer font-semibold text-secondary"
                     >
                       {category.category}
                     </div>
@@ -108,7 +104,7 @@ const Products = () => {
 
       {/* displaying products */}
       <div>
-        <div className="grid grid-cols-5 mx-6 mt-4 gap-2  ">
+        <div className="grid grid-cols-2 md:grid-cols-5 mx-6 mt-4 gap-2  ">
           {filteredProducts?.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
