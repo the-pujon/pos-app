@@ -9,18 +9,28 @@ import {
   FaPlus,
   FaPlusCircle,
   FaRegHandRock,
-  FaTrash,
 } from "react-icons/fa";
-import { MdMenu, MdOutlineCancel } from "react-icons/md";
-import { FiPlusCircle } from "react-icons/fi";
+import { MdMenu, MdOutlineCancel, MdOutlineLocalShipping } from "react-icons/md";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { FiEdit } from "react-icons/fi";
+import { RiEditBoxLine } from "react-icons/ri";
 
-const Cart = () => {
+const Orders = () => {
   const [isHydrated, setIsHydrated] = useState(false);
-  const cart = useAppSelector((state) => state.cart);
-  console.log(cart);
+
+  const [orders, setOrders] = useState({});
 
   useEffect(() => {
     setIsHydrated(true);
+
+    fetch("./Data/Orders.json")
+      .then((res) => res.json())
+      .then((data) => {
+
+        //filtering order based on customers name
+        const filterOrders = data.filter((order) => order.name === "Steve Jobs")
+        setOrders(filterOrders[0]);
+      });
   }, []);
 
   if (!isHydrated) {
@@ -41,7 +51,7 @@ const Cart = () => {
               htmlFor="my-drawer"
               className="text-5xl drawer-button w-fit cursor-pointer"
             >
-             <MdMenu />
+              <MdMenu />
             </label>
           </div>
           <div className="drawer-side">
@@ -62,17 +72,17 @@ const Cart = () => {
           </div>
         </div>
 
-        <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center bg-red-200 text-red-500 w-full text-xl font-semibold rounded">
-          <MdOutlineCancel /> Note
+        <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center  bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
+        <RiEditBoxLine /> Note
         </button>
-        <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center bg-red-200 text-red-500 w-full text-xl font-semibold rounded">
-          <MdOutlineCancel /> Shipping
+        <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center  bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
+        <MdOutlineLocalShipping /> Shipping
         </button>
         <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
           <FaRegHandRock /> Hold Orders
         </button>
         <button className="flex text-center py-2 px-2 text-nowrap gap-1 items-center bg-primary2/20 text-primary2 w-full text-xl font-semibold rounded">
-          <FaPercent /> New Items
+        <FaPlusCircle /> New Items
         </button>
       </div>
 
@@ -83,12 +93,15 @@ const Cart = () => {
           <FaPlus />
         </div>
       </div>
-      {/* cart */}
+      {/* orders */}
       <div>
-        {/* cart */}
+        {/* orders */}
         <div>
-          {cart?.products?.map((product) => (
+          {orders?.products?.map((product) => (
             <div key={product.id} className="flex gap-2 items-center">
+               <button>
+               <FiEdit className='text-secondary text-xl'/>
+              </button>
               <div className="text-secondary font-semibold text-xl justify-center items-center w-full grid grid-cols-5 border p-2">
                 <div className="col-span-2">{product?.name}</div>
                 <div className="text-start">${product?.price}</div>
@@ -99,9 +112,10 @@ const Cart = () => {
                 </div>
                 <div className="text-end">{product?.total}</div>
               </div>
-              <div>
-                <FaTrash className="text-red-500" />
-              </div>
+              {/* delete */}
+              <button>
+                <FaRegTrashCan className="text-red-500" />
+              </button>
             </div>
           ))}
         </div>
@@ -111,7 +125,7 @@ const Cart = () => {
           <div className="flex-1 flex divide-y-2 flex-col mt-8 font-medium">
             <div className="flex w-full justify-between p-2 border-t-2">
               <span className="text-secondary">Subtotal</span>
-              <span className="text-xl font-semibold">${cart.totalPrice}</span>
+              <span className="text-xl font-semibold">${orders.totalPrice}</span>
             </div>
             <div className="flex w-full justify-between p-2">
               <span className="text-secondary">TAX</span>
@@ -123,7 +137,7 @@ const Cart = () => {
             </div>
             <div className="flex w-full justify-between p-2">
               <span className="text-primary font-semibold">
-                Discount on cart
+                Discount on orders
               </span>
               <span className="text-xl font-semibold">$10</span>
             </div>
@@ -132,11 +146,11 @@ const Cart = () => {
         {/* total */}
         <div className="flex bg-primary/20 py-3 px-2 text-primary font-semibold rounded items-center">
           <div className="flex-1">
-            Products Count({cart?.products?.length}){" "}
+            Products Count({orders?.products?.length}){" "}
           </div>
           <div className="flex-1 flex item-center justify-between text-2xl">
             <div>Total</div>
-            <div>${cart?.totalPrice + 25 + 5 + 10}</div>
+            <div>${orders?.totalPrice + 25 + 5 + 10}</div>
           </div>
         </div>
 
@@ -161,4 +175,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Orders;
