@@ -7,7 +7,10 @@ import ProductCard from "../ProductCard/ProductCard";
 
 const Products = () => {
   const [category, SetCategory] = useState([]);
+  const [selectedCategory, SetSelectedCategory] = useState("");
   const [products, SetProducts] = useState([]);
+  const [filteredProducts, SetFilteredProducts] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetch("./Data/Category.json")
@@ -16,17 +19,36 @@ const Products = () => {
 
     fetch("./Data/Products.json")
       .then((res) => res.json())
-      .then((data) => SetProducts(data));
+      .then((data) => {
+        console.log(data)
+        SetProducts(data);
+        SetFilteredProducts(data);
+      });
   }, []);
+
+  console.log(search)
+
+  useEffect(() => {
+    if (selectedCategory.category === "All Categories") {
+      SetFilteredProducts(products);
+    } else {
+      const selectedProducts = products.filter(
+        (p) => p.category === selectedCategory.category
+      );
+      SetFilteredProducts(selectedProducts)
+    }
+  }, [selectedCategory]);
 
   return (
     <div className="bg-background border min-h-screen">
-      <ProductsSearch />
+      <ProductsSearch setSearch={setSearch} />
 
+      {/* category filter */}
       <div className="w-full flex items-center justify-center mt-4">
         <div className="flex items-center gap-2">
           {category?.slice(0, 5)?.map((category) => (
             <div
+              onClick={() => SetSelectedCategory(category)}
               key={category.id}
               className="py-2 px-4 w-fit border-[3px] border-secondary rounded hover:border-primary hover:text-primary cursor-pointer font-semibold text-secondary"
             >
@@ -61,6 +83,7 @@ const Products = () => {
                 <div className=" p-4 min-h-full bg-white text-base-content">
                   {category?.map((category) => (
                     <div
+                      onClick={() => SetSelectedCategory(category)}
                       key={category.id}
                       className="py-2 px-4 w-fit m-2 h-fit border-[3px] border-secondary rounded inline-flex hover:border-primary hover:text-primary cursor-pointer font-semibold text-secondary"
                     >
@@ -74,9 +97,11 @@ const Products = () => {
           {/*</div>*/}
         </div>
       </div>
+
+      {/* displaying products */}
       <div>
-        <div className='grid grid-cols-5 mx-6 mt-4 gap-2  ' >
-          {products?.map((product) => (
+        <div className="grid grid-cols-5 mx-6 mt-4 gap-2  ">
+          {filteredProducts?.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

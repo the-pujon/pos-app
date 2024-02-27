@@ -9,7 +9,7 @@
     {
         "id": 2,
         "image":"https://lsco.scene7.com/is/image/lsco/Levis/clothing/777110002-alt4-pdp.jpg?fmt=jpeg&qlt=70&resMode=bisharp&fit=crop,1&op_usm=1.25,0.6,8&wid=2000&hei=1800",
-        "category": "Women Fashion",
+        "category": "Women Fashions",
         "name": "Levi's Red Tab Florence",
         "price": 45.50
     },
@@ -37,7 +37,7 @@
     {
         "id": 6,
         "image":"https://www.xtees.com/uploads/products/images/primary/black-white-plain-women-raglan-3-4th-sleeve-t-shirts_1611959198.jpeg",
-        "category": "Women Fashion",
+        "category": "Women Fashions",
         "name": "Pure White & Black Sleeve",
         "price": 22.50
     },
@@ -72,7 +72,7 @@
     {
         "id": 11,
         "image":"https://lsco.scene7.com/is/image/lsco/Levis/clothing/777110002-alt4-pdp.jpg?fmt=jpeg&qlt=70&resMode=bisharp&fit=crop,1&op_usm=1.25,0.6,8&wid=2000&hei=1800",
-        "category": "Women Fashion",
+        "category": "Women Fashions",
         "name": "Levi's Red Tab Florence",
         "price": 45.50
     },
@@ -100,7 +100,7 @@
     {
         "id": 15,
         "image":"https://www.xtees.com/uploads/products/images/primary/black-white-plain-women-raglan-3-4th-sleeve-t-shirts_1611959198.jpeg",
-        "category": "Women Fashion",
+        "category": "Women Fashions",
         "name": "Pure White & Black Sleeve",
         "price": 22.50
     },
