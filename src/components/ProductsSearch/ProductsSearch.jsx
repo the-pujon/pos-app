@@ -11,7 +11,7 @@ const ProductsSearch = ({ setSearch }) => {
         name="productSearch"
         id="productSearch"
         placeholder="Search Products..."
-        className="w-full font-semibold text-xl"
+        className="w-full font-semibold text-xl outline-none"
       />
     </form>
   );

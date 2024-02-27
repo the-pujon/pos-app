@@ -10,7 +10,7 @@ const Products = () => {
   const [selectedCategory, SetSelectedCategory] = useState("");
   const [products, SetProducts] = useState([]);
   const [filteredProducts, SetFilteredProducts] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetch("./Data/Category.json")
@@ -20,13 +20,21 @@ const Products = () => {
     fetch("./Data/Products.json")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         SetProducts(data);
         SetFilteredProducts(data);
       });
   }, []);
 
-  console.log(search)
+  useEffect(() => {
+    const selectedProducts = products.filter((p) => {
+      const name = p.name.toLowerCase();
+      const value = search.toLowerCase();
+      return name?.startsWith(value);
+    });
+    SetFilteredProducts(selectedProducts);
+    //}
+  }, [search]);
 
   useEffect(() => {
     if (selectedCategory.category === "All Categories") {
@@ -35,7 +43,7 @@ const Products = () => {
       const selectedProducts = products.filter(
         (p) => p.category === selectedCategory.category
       );
-      SetFilteredProducts(selectedProducts)
+      SetFilteredProducts(selectedProducts);
     }
   }, [selectedCategory]);
 
