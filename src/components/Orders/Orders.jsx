@@ -3,6 +3,7 @@
 import { useAppSelector } from "@/libs/hooks";
 import React, { useState, useEffect } from "react";
 import {
+  FaFileInvoiceDollar,
   FaHandHoldingUsd,
   FaMinusCircle,
   FaPercent,
@@ -13,11 +14,15 @@ import {
 import {
   MdMenu,
   MdOutlineCancel,
+  MdOutlineDashboard,
   MdOutlineLocalShipping,
+  MdOutlineLocationOn,
+  MdOutlineSettings,
 } from "react-icons/md";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { RiEditBoxLine } from "react-icons/ri";
+import Image from "next/image";
 
 const Orders = () => {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -48,7 +53,7 @@ const Orders = () => {
       <div className="flex w-full justify-between items-center gap-4 mt-2 mb-4 overflow-auto">
         {/* drawer left */}
 
-        <div className="drawer">
+        <div className="drawer w-48">
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content w-10 md:w-fit">
             {/* Page content here */}
@@ -65,13 +70,27 @@ const Orders = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu p-4 w-80 min-h-full bg-white text-base-content">
-              {/* Sidebar content here */}
-              <li>
-                <a>Sidebar Item 1</a>
+            <ul className="menu p-4 w-2/3 md:w-1/3 lg:w-1/5 min-h-full bg-[#efefef] text-base-content">
+              <div>
+                <Image
+                  src="/Image/DashboarImage.png"
+                  alt="dashboard logo"
+                  width={300}
+                  height={300}
+                  className="w-80"
+                />
+              </div>
+              <li className='hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold' >
+                <a className='flex gap-3 items-center' ><MdOutlineDashboard /> Dashboard</a>
               </li>
-              <li>
-                <a>Sidebar Item 2</a>
+              <li className='hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold' >
+                <a className='flex gap-3 items-center'><MdOutlineLocationOn /> Location</a>
+              </li>
+              <li className='hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold' >
+                <a className='flex gap-3 items-center'><FaFileInvoiceDollar /> POS Invoice</a>
+              </li>
+              <li className='hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold' >
+                <a className='flex gap-3 items-center'><MdOutlineSettings /> Setting</a>
               </li>
             </ul>
           </div>
@@ -114,17 +133,20 @@ const Orders = () => {
             </p>
           </div>
           <form method="dialog" className="modal-backdrop">
-              <button>close</button>
-            </form>
+            <button>close</button>
+          </form>
         </dialog>
       </div>
 
       {/* orders */}
-      <div className='w-full overflow-auto' >
+      <div className="w-full overflow-auto">
         {/* orders */}
-        <div className='w-full overflow-auto'>
+        <div className="w-full overflow-auto">
           {orders?.products?.map((product) => (
-            <div key={product.id} className="flex gap-2 items-center w-[30rem] md:w-full overflow-auto">
+            <div
+              key={product.id}
+              className="flex gap-2 items-center w-[30rem] md:w-full overflow-auto"
+            >
               <button>
                 <FiEdit className="text-secondary text-xl" />
               </button>
