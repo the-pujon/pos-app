@@ -1,6 +1,5 @@
 "use client";
 
-import { useAppSelector } from "@/libs/hooks";
 import React, { useState, useEffect } from "react";
 import {
   FaFileInvoiceDollar,
@@ -27,7 +26,7 @@ import AddCustomerForm from "../AddCustomerForm/AddCustomerForm";
 import { BsChevronLeft } from "react-icons/bs";
 
 const Orders = () => {
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false); //for hydration
 
   const [orders, setOrders] = useState({});
 

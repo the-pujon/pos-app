@@ -1,24 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import {useAppDispatch, useAppSelector} from "@/libs/hooks";
-import {addItemToCart} from "@/libs/features/cart/CartSlice";
 
 const ProductCard = ({ product }) => {
-  const dispatch = useAppDispatch()
-
-  //adding in cart
-  const handleCart = ((p)=>{
-    const cart = {
-      ...p,
-      quantity:1,
-      total: p.price
-
-    }
-    dispatch(addItemToCart(cart))
-  })
 
   return (
-    <div onClick={()=>handleCart(product)} className='flex flex-col divide-y-2 border-2 transition-all duration-500
+    <div className='flex flex-col divide-y-2 border-2 transition-all duration-500
     text-secondary hover:border-primary hover:text-primary hover:scale-105 items-center cursor-pointer' >
       <div>
         <Image
