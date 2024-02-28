@@ -23,6 +23,8 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { RiEditBoxLine } from "react-icons/ri";
 import Image from "next/image";
+import AddCustomerForm from "../AddCustomerForm/AddCustomerForm";
+import { BsChevronLeft } from "react-icons/bs";
 
 const Orders = () => {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -70,28 +72,43 @@ const Orders = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu p-4 w-2/3 md:w-1/3 lg:w-1/5 min-h-full bg-[#efefef] text-base-content">
+            <ul className="menu p-4 w-2/3 md:w-1/3 lg:w-1/5 min-h-full flex flex-col justify-between bg-[#efefef] text-base-content">
+              {/*<div>*/}
               <div>
-                <Image
-                  src="/Image/DashboarImage.png"
-                  alt="dashboard logo"
-                  width={300}
-                  height={300}
-                  className="w-80"
-                />
+                <div>
+                  <Image
+                    src="/Image/DashboarImage.png"
+                    alt="dashboard logo"
+                    width={300}
+                    height={300}
+                    className="w-80"
+                  />
+                </div>
+                <li className="hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold text-secondary">
+                  <a className="flex gap-3 items-center">
+                    <MdOutlineDashboard /> Dashboard
+                  </a>
+                </li>
+                <li className="hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold text-secondary">
+                  <a className="flex gap-3 items-center">
+                    <MdOutlineLocationOn /> Location
+                  </a>
+                </li>
+                <li className="hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold text-secondary">
+                  <a className="flex gap-3 items-center">
+                    <FaFileInvoiceDollar /> POS Invoice
+                  </a>
+                </li>
+                <li className="hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold text-secondary">
+                  <a className="flex gap-3 items-center">
+                    <MdOutlineSettings /> Setting
+                  </a>
+                </li>
               </div>
-              <li className='hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold' >
-                <a className='flex gap-3 items-center' ><MdOutlineDashboard /> Dashboard</a>
-              </li>
-              <li className='hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold' >
-                <a className='flex gap-3 items-center'><MdOutlineLocationOn /> Location</a>
-              </li>
-              <li className='hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold' >
-                <a className='flex gap-3 items-center'><FaFileInvoiceDollar /> POS Invoice</a>
-              </li>
-              <li className='hover:bg-primary2/20 hover:text-primary2 duration-300 transition-all text-xl font-semibold' >
-                <a className='flex gap-3 items-center'><MdOutlineSettings /> Setting</a>
-              </li>
+              <button className="w-full text-center border text-xl py-2 border-secondary">
+                Logout
+              </button>
+              {/*</div>*/}
             </ul>
           </div>
         </div>
@@ -113,24 +130,28 @@ const Orders = () => {
       {/* customers */}
       <div className="flex bg-primary2/20 py-3 px-2 text-primary2 font-semibold text-xl rounded items-center justify-between">
         <div>Steve Jobs</div>
-        {/*<div className="border-4 border-primary2 rounded-full p-1">
-          <FaPlus />
-        </div>*/}
 
-        {/* Open the modal using document.getElementById('ID').showModal() method */}
+        {/* Open the modal using document.getElementById('addCustomerForm').showModal() method */}
         <button
           className="border-4 border-primary2 rounded-full p-1"
-          onClick={() => document.getElementById("my_modal_5").showModal()}
+          onClick={() => document.getElementById("addCustomerForm").showModal()}
         >
           <FaPlus />
         </button>
 
-        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-          <div className="modal-box  bg-white">
-            <h3 className="font-bold text-lg">Hello!</h3>
-            <p className="py-4">
-              Press ESC key or click the button below to close
-            </p>
+        <dialog
+          id="addCustomerForm"
+          className="modal modal-bottom sm:modal-middle"
+        >
+          <div className="modal-box !rounded relative  bg-white">
+            <button
+              className="absolute text-3xl text-black cursor-pointer z-20"
+              onClick={() => document.getElementById("addCustomerForm").close()}
+            >
+              <BsChevronLeft />
+            </button>
+
+            <AddCustomerForm />
           </div>
           <form method="dialog" className="modal-backdrop">
             <button>close</button>
